@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Giphy Search</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<button data-search = "Kobe Bryant">Kobe</button>
+<button data-search = "Matt Ryan">Matt Ryan</button>
+<button data-search = "Muhammad Ali">Muhummad Ali</button>
+<br><br>
+ <!-- still working on adding it to the buttons. -->
+<form id="gif-form" role="form">
+   <div class="form-group">
+   <label for="action-input">Add an athlete</label>
+   <input type="text" id="action-input">
+   </div>
+   <input id="addGif" type="submit" value="Add athlete" class="btn btn-primary">
+    </form> 
+<br><br>
+<div id="GIFarea"></div>
+
+<script type="text/javascript">
+	var topics = [];
+
+	$('button').on('click',function(){
+		$("#GIFarea").empty();
+		var x = $(this).data("search");
+
+		var queryURL = "https://api.giphy.com/v1/gifs/search?q="+x+"&api_key=2lvaJAZLEZiCKnZHXhDmJCij9D1B2j33&limit=9"
+		console.log(queryURL);
+
+		$.ajax({url:queryURL,method:'GET'})
+			.done(function(response){
+				console.log(response);
+				for(var i = 0; i < response.data.length;i++){
+					var index = i;
+					$('#GIFarea').append("<p>Rating: "+ response.data[i].rating + "</p");
+					$('#GIFarea').append("<img src ='"+ response.data[i].images.downsized_still.url+"'>");
+					$('img').on('click',function(){
+					$('#GIFarea').append("<img src ='"+ response.data[index].images.downsized.url+"'>")
+				})
+					//THE CODE IM CURRENTLY WORKING ON TO CHANGE IT TO ANIMATE WHEN CLICKED
+					// $('img').on('click',function(){
+					// for (var j = 0; j< response.data.length; j++){										
+					// 	var clickedImg = $('<img>');												
+					// 	clickedImg.attr('src', response.data[j].images.downsized.url);
+					// 	$(this).remove();
+					// 	$('#GIFarea').append(clickedImg);
+					}
+				})
+			})				
+
+
+</script>
+
+
+</body> 
+</html>
