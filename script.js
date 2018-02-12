@@ -35,7 +35,7 @@ $("#removeGif").on("click", function(){
 
 function displayGifs(){
     var action = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=2lvaJAZLEZiCKnZHXhDmJCij9D1B2j33&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=2lvaJAZLEZiCKnZHXhDmJCij9D1B2j33&limit=10";
 
     $.ajax({
         url: queryURL,
